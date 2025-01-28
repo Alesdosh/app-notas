@@ -1,0 +1,14 @@
+<style href="pagina-login.component.css" type="stylesheet/css"></style>
+
+<div class="cajaBotones">
+    <button (click)="sumar()" class="suma">sumar</button>
+    <button (click)="restar()">restar</button>  
+</div>
+
+<a href="/inicio" routerLink="/inicio">inicio</a>
+
+<p>Numero actual: {{numero}}</p>
+
+<input type="text" (input)="actualizarNombre($event)">
+
+<button (click)="mostrarAlerta()">mostrar alerta</button>

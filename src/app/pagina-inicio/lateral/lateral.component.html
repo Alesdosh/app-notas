@@ -1,0 +1,18 @@
+<aside class="w-1/6 bg-secundario border-2 border-solid border-acento h-screen rounded-lg"> <!--tailwindcss se usa con class-->
+
+    <div>
+        <button (click)="HacerMostradoVerdadero()" class="text-white">+</button> <!-- boton que abrira una ventana modal que pedira el titulo de la pagina-->
+    </div>
+
+
+    @if (mostrado()) { <!-- hacer que esto sea otro componente-->
+        <div> <!-- mostrar modal en la que se pueda ingresar un titulo de la pagina-->
+            <button (click)="HacerMostradoFalso()">X</button>
+
+            <h2>Ingresa el titulo de la pagina</h2>
+            <input type="text" [value]="tituloPagina()" (input)="EscucharValorTitulo($event)" placeholder="Titulo"/>
+            <button (click)="CrearPagina()">Crear Pagina</button>
+        </div>
+    }
+    
+</aside>
