@@ -1,3 +1,8 @@
-<div class="w-full h-full bg-primario">   
+<div class="w-full h-full bg-primario flex">   
     <app-lateral></app-lateral>
+
+    @if (mostrado$()) { 
+        <app-modal></app-modal>
+    }
+
 </div>

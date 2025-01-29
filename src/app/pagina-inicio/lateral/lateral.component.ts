@@ -1,42 +1,32 @@
-import { Component, signal} from '@angular/core';
+import { Component, signal, OnInit, WritableSignal} from '@angular/core';
 import { PeticionesHttpService } from '../../peticiones-http.service';
+import { PaginaInicioService } from '../pagina-inicio.service';
+import { ModalComponent } from '../components/modal/modal.component';
 
 @Component({
   selector: 'app-lateral',
-  imports: [],
+  imports: [ModalComponent],
   templateUrl: './lateral.component.html',
   styleUrl: './lateral.component.css'
 })
-export class LateralComponent {
-  mostrado = signal(false); // meter al service
-  tituloPagina = signal("") // meter al modal
-  
-  constructor(private peticioneshttp: PeticionesHttpService){}
+export class LateralComponent implements OnInit {
 
-  HacerMostradoVerdadero(){ // meter al service
-    this.mostrado.set(true)
+  mostrado$: WritableSignal<boolean>
+
+  constructor(private peticioneshttp: PeticionesHttpService, private paginaInicioService: PaginaInicioService){
+    this.mostrado$ = this.paginaInicioService.mostrado;
   }
 
-  HacerMostradoFalso(){ // meter al service
-    this.mostrado.set(false)
+  ngOnInit(): void {
+    
   }
 
-  CrearPagina(){ // post a la api de paginas con el titulo de la pagina // meter al modal
-    if(this.tituloPagina() == ""){
-      alert("Debes ingresar un titulo")
-    } else {
-      const data = {
-        nombre: this.tituloPagina()
-      }
-
-      this.peticioneshttp.CrearEntidad("pagina", data)
-      // llamada a la funcion que hace fetch a la api
-    }
+  mostrar(){
+    this.paginaInicioService.HacerMostradoVerdadero()
   }
 
-  EscucharValorTitulo(e: Event){  // meter al modal
-    const value = (e?.target as HTMLInputElement).value;
-    this.tituloPagina.set(value)
+  ocultar(){
+    this.paginaInicioService.HacerMostradoFalso()
   }
 
 

@@ -1,25 +1,34 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, WritableSignal} from '@angular/core';
 import { LateralComponent } from './lateral/lateral.component';
-import { GlobalContextService } from '../global-context.service';
+import { PeticionesHttpService } from '../peticiones-http.service';
+import { PaginaInicioService } from './pagina-inicio.service';
+import { ModalComponent } from './components/modal/modal.component';
 
 @Component({
   selector: 'app-pagina-inicio',
-  imports: [LateralComponent],
+  imports: [LateralComponent, ModalComponent],
   templateUrl: './pagina-inicio.component.html',
   styleUrl: './pagina-inicio.component.css'
 })
 export class PaginaInicioComponent implements OnInit {
   
 
-  // codigo para tener un estado global
-  contraseña: string | null = "";
-
-  constructor(private globalContext: GlobalContextService){}
-
-  ngOnInit(): void {
-      this.globalContext.contraseña$.subscribe((contraseña) => {
-        this.contraseña = contraseña
-      })
-  }
+   mostrado$: WritableSignal<boolean>
+  
+    constructor(private peticioneshttp: PeticionesHttpService, private paginaInicioService: PaginaInicioService){
+      this.mostrado$ = this.paginaInicioService.mostrado;
+    }
+  
+    ngOnInit(): void {
+      
+    }
+  
+    mostrar(){
+      this.paginaInicioService.HacerMostradoVerdadero()
+    }
+  
+    ocultar(){
+      this.paginaInicioService.HacerMostradoFalso()
+    }
 
 }
