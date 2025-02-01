@@ -23,6 +23,8 @@ export class ModalComponent {
 
       this.peticionesHttp.CrearEntidad("pagina", data)
     }
+
+    this.ocultar()
   }
 
   EscucharValorTitulo(e: Event){  // meter al modal

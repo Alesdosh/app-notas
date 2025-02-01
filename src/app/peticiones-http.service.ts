@@ -9,7 +9,7 @@ export class PeticionesHttpService {
 
   async ObtenerListaApi(ruta: String){ 
     try {
-        const response = await fetch(`http://localhost:8000/${ruta}`, {
+        const response = await fetch(`http://localhost:3000/${ruta}`, {
           method: "GET",
           cache: "no-cache",
           headers: {
@@ -35,7 +35,7 @@ export class PeticionesHttpService {
 async CrearEntidad( ruta: String, data: Object){
     try {
        
-        const respuesta = await fetch(`http://localhost:8000/${ruta}`, {
+        const respuesta = await fetch(`http://localhost:3000/${ruta}`, {
           method: "POST",
           cache: "no-cache",
           headers: {
@@ -57,7 +57,7 @@ async CrearEntidad( ruta: String, data: Object){
 
 async ObtenerDatosCompletos(ruta: String, id: String){
   try {
-    const response = await fetch(`http://localhost:8000/${ruta}/${id}`, {
+    const response = await fetch(`http://localhost:3000/${ruta}/${id}`, {
       method: "GET",
       cache: "no-cache",
       headers: {
@@ -82,7 +82,7 @@ async ObtenerDatosCompletos(ruta: String, id: String){
 
 async EditarEntidad(ruta: String, id: String , data: Object){
   try {
-    const response = await fetch(`http://localhost:8000/${ruta}/${id}`, {
+    const response = await fetch(`http://localhost:3000/${ruta}/${id}`, {
       method: "PUT",
       cache: "no-cache",
       headers: {

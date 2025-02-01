@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, signal} from '@angular/core';
+import { PeticionesHttpService} from '../peticiones-http.service';
 
 @Component({
   selector: 'app-pagina-login',
@@ -7,23 +8,65 @@ import { Component } from '@angular/core';
   styleUrl: './pagina-login.component.css'
 })
 export class PaginaLoginComponent {
-  numero: number = 0;
-  nombre: string = ""
+    nombre = signal("")
+    passwordR = signal("")
+    emailR = signal("")
 
-    sumar(){
-      this.numero = this.numero + 1
+    passwordL = signal("")
+    emailL = signal("")
+
+    mostradoR = signal(true)
+
+
+    ActualizarPassword(e: Event, tipo: String){
+      const value = (e?.target as HTMLInputElement).value;
+
+      switch(tipo){
+        case "sesion": {
+          this.passwordL.set(value)
+        }
+        break;
+        case "registro":{
+          this.passwordR.set(value)
+        }
+        break
+      }
+
     }
 
-    restar(){
-      this.numero = this.numero - 1
+
+    ActualizarEmail(e: Event, tipo: String){
+      const value = (e?.target as HTMLInputElement).value;
+
+      switch(tipo){
+        case "sesion": {
+          this.emailL.set(value)
+        }
+        break;
+        case "registro":{
+          this.emailR.set(value)
+        }
+        break
+      }
+
     }
 
-    actualizarNombre(event: Event){ // funciona como un onChange 
-      const inputNombre = event.target as HTMLInputElement
-      this.nombre = inputNombre.value
+
+    ActualizarNombre(e: Event){
+      const value = (e?.target as HTMLInputElement).value;
+
+      this.nombre.set(value)
     }
 
-    mostrarAlerta(){
-      alert(this.nombre)
+    HacerFalso(){
+      this.mostradoR.set(false)
     }
+
+    HacerVerdadero(){
+      this.mostradoR.set(true)
+    } 
+
+
+
+
 }
