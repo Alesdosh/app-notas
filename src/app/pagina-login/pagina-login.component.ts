@@ -15,7 +15,7 @@ export class PaginaLoginComponent {
     passwordL = signal("")
     emailL = signal("")
 
-    mostradoR = signal(true)
+    mostradoR = signal(false)
 
 
     ActualizarPassword(e: Event, tipo: String){
