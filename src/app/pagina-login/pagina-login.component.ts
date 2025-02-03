@@ -1,5 +1,11 @@
 import { Component, signal} from '@angular/core';
 import { PeticionesHttpService} from '../peticiones-http.service';
+import { Router } from '@angular/router';
+
+interface Usuario {
+  username: string,
+  password: string
+}
 
 @Component({
   selector: 'app-pagina-login',
@@ -13,9 +19,13 @@ export class PaginaLoginComponent {
     emailR = signal("")
 
     passwordL = signal("")
+    nombreL = signal("")
     emailL = signal("")
 
     mostradoR = signal(false)
+
+    constructor(private peticionesHttp: PeticionesHttpService, private router: Router){}
+
 
 
     ActualizarPassword(e: Event, tipo: String){
@@ -66,6 +76,38 @@ export class PaginaLoginComponent {
       this.mostradoR.set(true)
     } 
 
+    
+
+   async EnviarRegistro(){
+
+      const data = {
+        username: this.nombre(),
+        password: this.passwordR()
+      }
+
+      this.peticionesHttp.CrearEntidad("usuarios", data)
+    }
+
+    async EnviarLogIn(){
+
+      this.peticionesHttp.ObtenerListaApi("usuarios").then((data: Usuario[]) => { // si coinciden los datos, entonces redirigir al usuario
+        const usuario = data.find(item => 
+          item.username == this.nombreL() && item.password == this.passwordL()
+        )
+
+        if(usuario){
+          // redirigir
+          this.router.navigate(['/inicio'])
+
+        } else {
+          alert("Usuario o Contraseña incorrectos")
+        }
+
+      })
+
+
+      
+    }
 
 
 
