@@ -62,10 +62,21 @@ export class PaginaLoginComponent {
     }
 
 
-    ActualizarNombre(e: Event){
+    ActualizarNombre(e: Event, tipo: String){
       const value = (e?.target as HTMLInputElement).value;
 
-      this.nombre.set(value)
+      switch(tipo){
+        case "sesion": {
+          this.nombreL.set(value)
+        }
+        break;
+        case "registro": {
+          this.nombre.set(value)
+        }
+        break;
+      }
+
+
     }
 
     HacerFalso(){
