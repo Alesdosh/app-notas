@@ -97,6 +97,8 @@ export class PaginaLoginComponent {
       }
 
       this.peticionesHttp.CrearEntidad("usuarios", data)
+
+      alert("usuario creado")
     }
 
     async EnviarLogIn(){
@@ -116,8 +118,6 @@ export class PaginaLoginComponent {
 
       })
 
-
-      
     }
 
 
