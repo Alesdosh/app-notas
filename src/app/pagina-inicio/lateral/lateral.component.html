@@ -1,17 +1,24 @@
-<aside class="min-w-64 max-w-64 bg-secundario border-2 border-solid border-acento h-screen rounded-lg">
+<aside 
+        class="min-w-64 max-w-64 bg-secundario min-h-screen mt-0 border-2 border-secundario" 
+        [class.opacity-40]="this.mostrado$()"> 
 
+    <div class="w-full h-8 rounded-lg flex space-x-20 items-center mt-2">
+
+            <h1 class="text-white text-3xl font-bold mt-3 ml-5">Notas</h1>
+    
+            <button (click)="mostrar()" class="text-white text-2xl mr-6 hover:bg-slate-700 pl-3 pr-3 rounded-xl mt-3">+</button> <!-- boton que abrira una ventana modal que pedira el titulo de la pagina-->
+
+        </div>
+
+    
     <div id="paginasAparte" class="h-1/5">
 
     </div>
 
-    <div class="w-full h-8 border-2 border-solid border-black rounded-lg flex justify-end items-center">
-        <button (click)="mostrar()" class="text-white text-2xl mr-6">+</button> <!-- boton que abrira una ventana modal que pedira el titulo de la pagina-->
-    </div>
-
-    <div class="w-full">
+    <div class="w-11/12 mt-20">
         <!--hacer map al arreglo de paginas, -->
         @for(pagina of paginas(); track pagina.id){
-            <a href="nota/{{pagina.id}}" class="border-2 border-solid border-slate-400 flex rounded-lg p-2 hover:bg-slate-600">
+            <a href="nota/{{pagina.id}}" class=" flex rounded-lg p-2 hover:bg-slate-600 ml-2">
                 <p class="text-white ml-3">{{pagina.nombre}}</p>
             </a>
         }   

@@ -1,4 +1,4 @@
-import { Component, signal, OnInit, WritableSignal} from '@angular/core';
+import { Component, signal, OnInit, WritableSignal, effect} from '@angular/core';
 import { PeticionesHttpService } from '../../peticiones-http.service';
 import { PaginaInicioService } from '../pagina-inicio.service';
 
@@ -26,12 +26,17 @@ export class LateralComponent implements OnInit {
 
   constructor(private peticioneshttp: PeticionesHttpService, private paginaInicioService: PaginaInicioService){
     this.mostrado$ = this.paginaInicioService.mostrado;
+
+
+    effect(() => { // effect para cada que cambie contador se ejecute ngoninit
+      console.log(this.paginaInicioService.contador())
+      this.ObtenerApi()
+    })
+
   }
 
   ngOnInit(): void {
-      this.peticioneshttp.ObtenerListaApi("pagina").then((data) => {
-        this.paginas.set(data)
-      })
+      this.ObtenerApi()
   }
 
   mostrar(){
@@ -41,6 +46,13 @@ export class LateralComponent implements OnInit {
   ocultar(){
     this.paginaInicioService.HacerMostradoFalso()
   }
+
+  ObtenerApi(){
+    this.peticioneshttp.ObtenerListaApi("pagina").then((data) => {
+      this.paginas.set(data)
+    })
+  }
+  
 
 
 }

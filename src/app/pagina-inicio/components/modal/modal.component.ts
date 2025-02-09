@@ -1,4 +1,4 @@
-import { Component, signal} from '@angular/core';
+import { Component, signal, WritableSignal} from '@angular/core';
 import { PeticionesHttpService } from '../../../peticiones-http.service';
 import { PaginaInicioService } from '../../pagina-inicio.service';
 
@@ -10,8 +10,13 @@ import { PaginaInicioService } from '../../pagina-inicio.service';
 })
 export class ModalComponent {
   tituloPagina = signal("") 
+    mostrado$: WritableSignal<boolean>
+  
 
-  constructor(private peticionesHttp: PeticionesHttpService, private paginaInicioService: PaginaInicioService){}
+  constructor(private peticionesHttp: PeticionesHttpService, private paginaInicioService: PaginaInicioService){
+    this.mostrado$ = this.paginaInicioService.mostrado;
+
+  }
 
   CrearPagina(){ // post a la api de paginas con el titulo de la pagina
     if(this.tituloPagina() == ""){
@@ -22,6 +27,7 @@ export class ModalComponent {
       }
 
       this.peticionesHttp.CrearEntidad("pagina", data)
+      this.paginaInicioService.ActualizarContador();
     }
 
     this.ocultar()

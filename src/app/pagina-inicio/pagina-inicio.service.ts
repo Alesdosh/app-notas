@@ -7,6 +7,7 @@ import { Injectable, signal} from '@angular/core';
 })
 export class PaginaInicioService {
     mostrado = signal(false); 
+    contador = signal(0)
   
   constructor() { }
 
@@ -17,5 +18,10 @@ export class PaginaInicioService {
   HacerMostradoFalso(){
     this.mostrado.set(false)
   }
+
+  ActualizarContador(){
+    this.contador.update(valor => valor + 1)
+  }
+
 
 }
